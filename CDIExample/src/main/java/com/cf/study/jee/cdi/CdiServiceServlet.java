@@ -34,6 +34,8 @@ public class CdiServiceServlet extends HttpServlet {
             os.write((requestScopedBean.print() + " : " + requestScopedBean + "<br/>").getBytes());
             os.write((sessionScopedBean.print() + " : " + sessionScopedBean + "<br/>").getBytes());
             os.write((applicationScopedBean.print() + " : " + applicationScopedBean + "<br/>").getBytes());
+            os.write("======<br/>".getBytes());
+            os.write(applicationScopedBean.get().getBytes());
             os.close();
         } catch (final IOException e) {
             e.printStackTrace();
