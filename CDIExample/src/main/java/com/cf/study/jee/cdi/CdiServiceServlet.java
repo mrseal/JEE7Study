@@ -15,6 +15,9 @@ public class CdiServiceServlet extends HttpServlet {
     private static final long serialVersionUID = 98280205875772978L;
 
     @Inject
+    private DependentCdiBean dependentBean;
+
+    @Inject
     private RequestScopedCdiBean requestScopedBean;
 
     @Inject
@@ -31,6 +34,7 @@ public class CdiServiceServlet extends HttpServlet {
             os = response.getOutputStream();
             os.write("<b>Try open multiple browser window keep refreshing the page</b><br/><br/>".getBytes());
             os.write(("This Servlet: " + this + "<br/>").getBytes());
+            os.write((dependentBean.print() + " : " + dependentBean + "<br/>").getBytes());
             os.write((requestScopedBean.print() + " : " + requestScopedBean + "<br/>").getBytes());
             os.write((sessionScopedBean.print() + " : " + sessionScopedBean + "<br/>").getBytes());
             os.write((applicationScopedBean.print() + " : " + applicationScopedBean + "<br/>").getBytes());
