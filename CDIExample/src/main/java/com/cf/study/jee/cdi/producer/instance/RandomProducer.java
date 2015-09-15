@@ -9,19 +9,26 @@
  * program(s) have been supplied.
  *******************************************************************************
  *----------------------------------------------------------------------------*/
-package com.cf.study.jee.cdi.instance;
-
-import java.io.Serializable;
+package com.cf.study.jee.cdi.producer.instance;
 
 import javax.enterprise.context.SessionScoped;
+import javax.enterprise.inject.Produces;
 
-@SessionScoped
-public class SessionScopedBean implements Serializable {
+public class RandomProducer {
 
-    private static final long serialVersionUID = -7001565590082032666L;
+    private final java.util.Random random = new java.util.Random(System.currentTimeMillis());
 
-    public SessionScopedBean print() {
-        return this;
+    @Produces
+    @Random
+    int next() {
+        return random.nextInt();
+    }
+
+    @Produces
+    @Random
+    @SessionScoped
+    RandomBean sessionNext() {
+        return new RandomBean();
     }
 
 }

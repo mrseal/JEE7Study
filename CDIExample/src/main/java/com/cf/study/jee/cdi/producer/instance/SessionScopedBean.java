@@ -9,20 +9,19 @@
  * program(s) have been supplied.
  *******************************************************************************
  *----------------------------------------------------------------------------*/
-package com.cf.study.jee.cdi.instance;
+package com.cf.study.jee.cdi.producer.instance;
 
-import static java.lang.annotation.ElementType.FIELD;
-import static java.lang.annotation.ElementType.METHOD;
+import java.io.Serializable;
 
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import javax.enterprise.context.SessionScoped;
 
-import javax.inject.Qualifier;
+@SessionScoped
+public class SessionScopedBean implements Serializable {
 
-@Qualifier
-@Retention(RetentionPolicy.RUNTIME)
-@Target({ FIELD, METHOD })
-public @interface Random {
+    private static final long serialVersionUID = -7001565590082032666L;
+
+    public SessionScopedBean print() {
+        return this;
+    }
 
 }

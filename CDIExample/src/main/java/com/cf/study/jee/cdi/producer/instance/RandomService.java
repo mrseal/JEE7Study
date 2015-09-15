@@ -9,7 +9,7 @@
  * program(s) have been supplied.
  *******************************************************************************
  *----------------------------------------------------------------------------*/
-package com.cf.study.jee.cdi.instance;
+package com.cf.study.jee.cdi.producer.instance;
 
 import java.io.IOException;
 
@@ -30,17 +30,21 @@ public class RandomService extends HttpServlet {
     private Instance<Integer> randomInt;
 
     @Inject
+    @Random
+    private Instance<RandomBean> sessionRandomBean;
+
+    @Inject
     private Instance<SessionScopedBean> sessionScopedBean;
 
     @Override
     public void doGet(final HttpServletRequest request, final HttpServletResponse response) {
         try {
             response.setContentType("text/html");
-            response.getOutputStream().write((randomInt.get() + "<br/>").getBytes());
+            response.getOutputStream().write(("@Dependant random int: " + randomInt.get() + "<br/>").getBytes());
+            response.getOutputStream().write(("@SessionScoped random bean: " + sessionRandomBean.get() + "<br/>").getBytes());
             response.getOutputStream().write(sessionScopedBean.get().print().toString().getBytes());
         } catch (final IOException e) {
             e.printStackTrace();
         }
     }
-
 }

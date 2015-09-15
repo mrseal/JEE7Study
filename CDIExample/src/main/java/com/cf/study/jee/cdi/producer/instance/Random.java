@@ -9,18 +9,20 @@
  * program(s) have been supplied.
  *******************************************************************************
  *----------------------------------------------------------------------------*/
-package com.cf.study.jee.cdi.instance;
+package com.cf.study.jee.cdi.producer.instance;
 
-import javax.enterprise.inject.Produces;
+import static java.lang.annotation.ElementType.FIELD;
+import static java.lang.annotation.ElementType.METHOD;
 
-public class RandomProducer {
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
-    private final java.util.Random random = new java.util.Random(System.currentTimeMillis());
+import javax.inject.Qualifier;
 
-    @Produces
-    @Random
-    int next() {
-        return random.nextInt();
-    }
+@Qualifier
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ FIELD, METHOD })
+public @interface Random {
 
 }
